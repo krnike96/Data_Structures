@@ -8,12 +8,17 @@ typedef struct stackArray{
 }stack;
 
 int isfull(stack *s,int size){
-    return (s->top == size)?1:0;
+    return (s->top == size - 1)?1:0;
 }
-int isempty(stack);
-int peek(stack);
-int push(stack,int);
+int isempty(stack *s){
+    return (s->top == -1)?1:0;
+}
+int push(stack *s,int size,int data){
+    if(isfull(s,size)) return -9999999;
+    else return s->arr[++s->top] = data;
+}
 int pop(stack);
+int peek(stack);
 
 void display(stack);
 
@@ -40,7 +45,12 @@ int main(){
         scanf("%d",&choice);
         switch(choice){
             case 1:
-            
+                printf("\nEnter the data to be pushed : ");
+                scanf("%d",&data);
+                data = push(s,size,data);
+                if(data == -9999999) printf("\nCan't Push. The Stack is Full!");
+                else printf("\nThe Pushed Element is : %d",data);
+                break;
             case 2:
 
             case 3:
@@ -50,7 +60,9 @@ int main(){
                 else printf("The Stack is not Full.");
                 break;
             case 5:
-
+                if(isempty(s)) printf("\nThe Stack is Empty!");
+                else printf("\nThe Stack is not Empty!");
+                break;
             case 0:
                 printf("\nExiting...");
                 free(s->arr);
