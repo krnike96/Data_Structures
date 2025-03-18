@@ -7,7 +7,9 @@ typedef struct stackArray{
     int top;
 }stack;
 
-int isfull(stack);
+int isfull(stack *s,int size){
+    return (s->top == size)?1:0;
+}
 int isempty(stack);
 int peek(stack);
 int push(stack,int);
@@ -21,6 +23,10 @@ int main(){
     printf("\nEnter the size of Stack : ");
     int size;
     scanf("%d",&size);
+    if(size < 1){
+        printf("\nInvalid Size!");
+        return 0;
+    }
     s->arr = (int *)malloc(sizeof(int)*size);
     int choice,data;
     while(1){
@@ -40,7 +46,9 @@ int main(){
             case 3:
 
             case 4:
-
+                if(isfull(s,size)) printf("\nThe Stack is Full.");
+                else printf("The Stack is not Full.");
+                break;
             case 5:
 
             case 0:
