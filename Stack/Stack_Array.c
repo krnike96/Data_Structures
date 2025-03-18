@@ -17,7 +17,10 @@ int push(stack *s,int size,int data){
     if(isfull(s,size)) return -9999999;
     else return s->arr[++s->top] = data;
 }
-int pop(stack);
+int pop(stack *s){
+    if(isempty(s)) return -9999999;
+    else return s->arr[s->top--];
+}
 int peek(stack);
 
 void display(stack);
@@ -52,7 +55,10 @@ int main(){
                 else printf("\nThe Pushed Element is : %d",data);
                 break;
             case 2:
-
+                data = pop(s);
+                if(data == -9999999) printf("\nCan't Pop. The Stack is Empty!");
+                else printf("\nThe Popped Element is : %d",data);
+                break;
             case 3:
 
             case 4:
